@@ -8,6 +8,7 @@ public class Utility {
 //########################################## Class Attributes ############################################
     private static String USERNAME;
     private static String PASSWORD;
+    public static String COACH_NO;
     
 // ###################### Setter Getter Methods ########################
     public String getUSERNAME() {
@@ -87,6 +88,56 @@ public class Utility {
         
         int randomIndex = (int)(Math.random() * 51);
         return TRAIN_NAME[randomIndex];
+    }
+    
+    public String[] getSeatNumbers(int passengerNumber){
+        System.out.println("Passenger Number = "+passengerNumber);
+        String[] All_Seats = new String[passengerNumber];
+        int randomIndex = ((int)(Math.random() * 25)+65);
+        char value = (char) randomIndex;
+        COACH_NO = String.valueOf(value);
+        int seatNo = ((int)(Math.random() * 46)+1);
+        All_Seats[0] = String.valueOf(value)+String.valueOf(seatNo)+ "";
+        for(int i=1;i<passengerNumber;i++){
+            System.out.println("Inside For Loop");
+            seatNo++;
+            All_Seats[i] = String.valueOf(value)+String.valueOf(seatNo)+ "";
+            System.out.println("Seat = "+All_Seats[i]);
+            System.out.println("Storing");
+        }
+        System.out.println("Replying the req");
+        return All_Seats;
+    }
+    
+    public int[] getSeatHilghlighterNumber(String[] stringArray){
+        System.out.println("Got the highlighter req");
+        int[] HilghlighterNumber_Array = new int[stringArray.length];
+        for(int i=0;i<stringArray.length;i++){
+            System.out.println(i);
+            HilghlighterNumber_Array[i] = Integer.parseInt(stringArray[i]);
+        }
+        System.out.println("Replying highlighter req");
+        return HilghlighterNumber_Array;
+    }
+    
+    public String[] getUserInfo(String username) throws FileNotFoundException{
+        
+        String got_The_Full_info="";
+        Scanner input = new Scanner(new FileInputStream("login.txt"));
+        while(input.hasNextLine()) {
+           String line = input.nextLine();
+           //System.out.println(line);
+           if(line.contains(username)) {
+               //System.out.println(line);
+              got_The_Full_info = line;
+           }
+        }
+        
+        String word[] = null;
+                word = got_The_Full_info.split(",");
+        //String username = word[0]; 
+        String password = word[1];
+        return word;
     }
     
     
